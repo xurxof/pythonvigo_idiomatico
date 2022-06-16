@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code {
+		font-family: 'Ubuntu Mono'; 
+		font-size: xx-large;
+		}
+	  .big { 
+		font-size: xx-large;
+		text-align: center;
+		}
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle
+# Python idiomático
+
+---
+
+class: center, middle
+# ¿Para qué?
+
+Aprovecha la expresividad de Python 
+ 
+Más legible
+
+Menos errores
+ 
+Recuerda: Mejor legible que eficiente
+
+---
+
+# Intercambiar variables
+
+.big[🤔]
+
+
+```
+a=1
+b=2
+
+c=a
+a=b
+b=c
+```
+
+
+---
+
+
+# Intercambiar variables
+
+.big[🤔]
+
+
+```
+a=1
+b=2
+
+c=a
+a=b
+b=c
+```
+
+.big[👌]
+
+
+```
+a,b = b,a
+```
+
+---
+
+# Desempaquetando cosas
+
+.big[👌]
+
+```
+number_list = [4, 1, 9]
+
+a, b, c = number_list
+```
+
+---
+
+# Desempaquetando cosas
+
+.big[🤔]
+
+```
+list =  [1, 2, 3, 4]
+
+first, last = list[0], list[-1] 
+```
+
+---
+
+# Desempaquetando cosas
+
+.big[🤔]
+
+```
+list =  [1, 2, 3, 4]
+
+first, last = list[0], list[-1] 
+```
+
+.big[👌]
+
+```
+first, *__, last = list 
+
+```
+
+
+---
+
+# Desempaquetando cosas
+
+.big[🤔]
+
+```
+test_list =  [1, 2, 3, 4]
+first, last = test_list[0], test_list[-1] 
+```
+
+.big[👌]
+
+```
+first, *__, last = test_list 
+```
+
+.big[👌]
+
+```
+header, *rows = open("filename").readlines()
+```
+
+---
+
+# ¿Alguno es X?
+
+.big[🤔]
+
+```
+if city == 'Troya' or city == 'Esparta' or city == 'Atenas':
+  found = True
+```
+
+---
+
+# ¿Alguno es X?
+
+.big[🤔]
+
+```
+if city == 'Troya' or city == 'Esparta' or city == 'Atenas':
+  found = True
+```
+
+.big[👌]
+
+```
+found = city in {'Troya', 'Esparta', 'Atenas'}
+```
+
+---
+
+# ¿Lista vacía?
+
+.big[🤔]
+
+```
+a = [1, 2, 3]
+if len(a) > 0:
+    ...
+```
+
+---
+
+# ¿Lista vacía?
+
+.big[🤔]
+
+```
+a = [1, 2, 3]
+if len(a) > 0:
+    ...
+```
+
+.big[👌]
+
+```
+a = [1, 2, 3]
+if a:
+    ...
+```
+
+---
+
+# ¿Entre dos valores?
+
+.big[🤔]
+
+```
+if x < 10 and x > 5:
+  ...
+```
+
+---
+
+# ¿Entre dos valores?
+
+.big[🤔]
+
+```
+if x < 10 and x > 5:
+  ...
+``` 
+
+.big[👌]
+
+```
+if 5 < x < 10:
+  ...
+```
+
+---
+
+# Bucles
+
+.big[🤔]
+
+```
+cities = ['Troya', 'Atenas', 'Esparta']
+
+while index < len(cities):
+  print(cities[index])
+  index += 1
+```
+
+---
+
+# Bucles
+
+.big[🤔]
+
+```
+cities = ['Troya', 'Atenas', 'Esparta']
+
+while index < len(cities):
+  print(cities[index])
+  index += 1
+```
+
+.big[👌]
+
+```
+for city in cities:
+  print(city)
+```
+
+---
+
+# Mas Bucles
+
+.big[🤔]
+
+```
+while index < len(ls):
+  print(index, ls[index])
+  index += 1
+```
+
+---
+
+# Mas Bucles
+
+.big[🤔]
+
+```
+while index < len(ls):
+  print(index, ls[index])
+  index += 1
+```
+
+.big[👌]
+
+```
+for index, value in enumerate(ls):
+  print(index, value)
+
+```
+
+---
+
+# Acceso a diccionarios
+
+.big[🤔]
+
+```
+d = {'Aquiles': 'aquiles@notmyemail.com'}
+
+if d.has_key('Aquiles'):
+    a = d['Aquiles']
+else:
+    a = 'sin_email'
+```
+
+
+---
+
+# Acceso a diccionarios
+
+.big[🤔]
+
+```
+d = {'Aquiles': 'aquiles@notmyemail.com'}
+
+if d.has_key('Aquiles'):
+    a = d['Aquiles']
+else:
+    a = 'sin_email'
+```
+
+.big[👌]
+
+``` 
+a =  d.get('Aquiles', 'sin_email')
+```
+
+---
+
+# Acceso a diccionarios
+
+.big[🤔]
+
+```
+d = {'Aquiles': 'aquiles@notmyemail.com'}
+
+if d.has_key('Aquiles'):
+    a = d['Aquiles']
+else:
+    a = 'sin_email'
+```
+
+.big[👌]
+
+```
+if 'Aquiles' in d:
+    print( d['Aquiles'] )
+```
+
+---
+
+# Fichero de texto
+
+.big[🤔]
+
+```
+f = open('odisea.txt')
+a = f.read()
+print(a)
+f.close()
+```
+
+---
+
+# Fichero de texto
+
+.big[🤔]
+
+```
+f = open('odisea.txt')
+a = f.read()
+print(a)
+f.close()
+```
+
+.big[🤔]
+
+```
+try:
+	f = open('odisea.txt')
+	a = f.read()
+	print(a)
+finally:
+	f.close()
+```
+
+---
+
+# Fichero de texto
+
+.big[🤔]
+
+```
+f = open('odisea.txt')
+a = f.read()
+print(a)
+f.close()
+```
+
+.big[👌]
+
+``` 
+with open('odisea.txt') as f:
+    for line in f:
+        print(line)
+```
+
+---
+
+# Pero recuerda: Explícito mejor que implícito
+
+.big[🤔]
+
+```
+def make_complex(*args):
+    x, y = args
+    return dict(**locals())
+```
+
+---
+
+# Pero recuerda: Explícito mejor que implícito
+
+.big[🤔]
+
+```
+def make_complex(*args):
+    x, y = args
+    return dict(**locals())
+```
+
+.big[👌]
+
+```
+def make_complex(x, y):
+    return {'x': x, 'y': y}
+```
+
+    </textarea>
+    <script src="remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
